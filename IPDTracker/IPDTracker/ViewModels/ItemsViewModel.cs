@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -26,6 +27,13 @@ namespace IPDTracker.ViewModels
                 var _item = item as Item;
                 Items.Add(_item);
                 await DataStore.AddItemAsync(_item);
+            });
+
+            MessagingCenter.Subscribe<ItemDetailPage, Item>(this, "UpdateItem", async (obj, item) =>
+            {
+                //var _item = Items.Where((Item arg) => arg.Id == item.Id).FirstOrDefault();
+                //_item = item;
+                await DataStore.UpdateItemAsync(item);
             });
         }
 

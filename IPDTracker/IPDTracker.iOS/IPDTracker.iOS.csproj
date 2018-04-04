@@ -91,6 +91,9 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Views\NewBillingEntryPage.xaml.cs">
+      <DependentUpon>NewBillingEntryPage.xaml</DependentUpon>
+    </Compile>
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -148,6 +151,11 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\xamarin_logo%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\NewBillingEntryPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="..\IPDTracker\IPDTracker.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

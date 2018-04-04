@@ -26,14 +26,14 @@
                     Style="{DynamicResource ListItemTextStyle}" 
                     FontSize="16" />
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding BillingDate}" 
+                                    <Label Text="{Binding BillingDateToString}" 
                     LineBreakMode="NoWrap"
                     Style="{DynamicResource ListItemDetailTextStyle}"
                     FontSize="13" />
-                                    <Label Text="{Binding BillingTime}" 
+                                    <Label Text="{Binding BillingTimeToString}" 
                     LineBreakMode="NoWrap"
                     Style="{DynamicResource ListItemDetailTextStyle}"
-                    FontSize="13" />
+                    FontSize="13" /> 
                                 </StackLayout>
                                 <Label Text="{Binding Notes}" 
                     LineBreakMode="NoWrap"

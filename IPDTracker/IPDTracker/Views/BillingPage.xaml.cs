@@ -36,14 +36,14 @@ namespace IPDTracker.Views
 
         async void AddItem_Clicked(object sender, EventArgs e)
         {
-            //await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
+            await Navigation.PushModalAsync(new NavigationPage(new NewBillingEntryPage()));
         }
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            //if (viewModel.Items.Count == 0)
-            //    viewModel.LoadItemsCommand.Execute(null);
+            if (viewModel.Items.Count == 0)
+                viewModel.LoadItemsCommand.Execute(null);
         }
     }
 }

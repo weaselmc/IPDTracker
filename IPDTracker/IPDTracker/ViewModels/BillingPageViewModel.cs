@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 using IPDTracker.Models;
 using Xamarin.Forms;
 
+using IPDTracker.Views;
+
 namespace IPDTracker.ViewModels
 {
     class BillingPageViewModel : BaseViewModel
     {
-        ObservableCollection<BillingEntry> Items { get; set; }
+        public ObservableCollection<BillingEntry> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 
         public BillingPageViewModel()
@@ -19,27 +21,13 @@ namespace IPDTracker.ViewModels
             Title = "Billing Entries";
             Items = new ObservableCollection<BillingEntry>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-            Items.Add(new BillingEntry() {
-                Id = Guid.NewGuid(),
-                ClientName = "Nelson Muntz",
-                BillingDate = DateTime.Now,
-                BillingTime = new TimeSpan(1, 22, 0),
-                Notes = "Horrible laugh!!!" });
-            Items.Add(new BillingEntry()
+
+            MessagingCenter.Subscribe<NewBillingEntryPage, BillingEntry>
+                (this, "AddEntry", async (obj, entry) =>
             {
-                Id = Guid.NewGuid(),
-                ClientName = "Jimbo Jones",
-                BillingDate = DateTime.Now,
-                BillingTime = new TimeSpan(0, 57, 0),
-                Notes = "Loves Beanies!!!"
-            });
-            Items.Add(new BillingEntry()
-            {
-                Id = Guid.NewGuid(),
-                ClientName = "Dolphin Rainbow",
-                BillingDate = DateTime.Now,
-                BillingTime = new TimeSpan(2, 42, 0),
-                Notes = "Stupid Hippie Parents!!!"
+                var _entry = entry as BillingEntry;
+                Items.Add(_entry);
+                //await DataStore.AddItemAsync(_entry);
             });
         }
         async Task ExecuteLoadItemsCommand()
@@ -57,6 +45,30 @@ namespace IPDTracker.ViewModels
                 //{
                 //    Items.Add(item);
                 //}
+                Items.Add(new BillingEntry()
+                {
+                    Id = Guid.NewGuid(),
+                    ClientName = "Nelson Muntz",
+                    BillingDate = DateTime.Now,
+                    BillingTime = new TimeSpan(1, 22, 0),
+                    Notes = "Horrible laugh!!!"
+                });
+                Items.Add(new BillingEntry()
+                {
+                    Id = Guid.NewGuid(),
+                    ClientName = "Jimbo Jones",
+                    BillingDate = DateTime.Now,
+                    BillingTime = new TimeSpan(0, 57, 0),
+                    Notes = "Loves Beanies!!!"
+                });
+                Items.Add(new BillingEntry()
+                {
+                    Id = Guid.NewGuid(),
+                    ClientName = "Dolphin Rainbow",
+                    BillingDate = DateTime.Now,
+                    BillingTime = new TimeSpan(2, 42, 0),
+                    Notes = "Stupid Hippie Parents!!!"
+                });
             }
             catch (Exception ex)
             {

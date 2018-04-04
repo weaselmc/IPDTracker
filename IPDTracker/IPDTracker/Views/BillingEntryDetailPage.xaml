@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IPDTracker.Views.BillingEntryDetailPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Update" Clicked="Update_Clicked" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Spacing="20" Padding="15">
+            <Entry Text="{Binding Entry.ClientName}" FontSize="Small" 
+                   Placeholder="Client Name" />
+            <DatePicker Date="{Binding Entry.BillingDate}" />
+            <TimePicker Format="HH:mm" Time="{Binding Entry.BillingTime}" />
+            <Label Text="Notes" FontSize="Medium" />
+            <Editor Text="{Binding Entry.Notes}" FontSize="Small" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

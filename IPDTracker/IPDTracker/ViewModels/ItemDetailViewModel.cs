@@ -1,6 +1,10 @@
 ﻿using System;
 
+using Xamarin.Forms;
+
 using IPDTracker.Models;
+using IPDTracker.Views;
+
 
 namespace IPDTracker.ViewModels
 {
@@ -11,6 +15,9 @@ namespace IPDTracker.ViewModels
         {
             Title = item?.Text;
             Item = item;
+            
         }
+
+
     }
 }

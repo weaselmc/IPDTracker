@@ -33,5 +33,11 @@ namespace IPDTracker.Views
             viewModel = new ItemDetailViewModel(item);
             BindingContext = viewModel;
         }
+
+        private  async void Update_Clicked(object sender, EventArgs e)
+        {
+            MessagingCenter.Send(this, "UpdateItem", viewModel.Item);
+            await Navigation.PopModalAsync();
+        }
     }
 }
