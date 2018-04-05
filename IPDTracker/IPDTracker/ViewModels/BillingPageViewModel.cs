@@ -29,6 +29,13 @@ namespace IPDTracker.ViewModels
                 Items.Add(_entry);
                 //await DataStore.AddItemAsync(_entry);
             });
+            MessagingCenter.Subscribe<NewBillingEntryPage, BillingEntry>
+                (this, "UpdateEntry", async (obj, entry) =>
+                {
+                    //var _entry = entry as BillingEntry;
+                    //Items.Add(_entry);
+                    //await DataStore.AddItemAsync(_entry);
+                });
         }
         async Task ExecuteLoadItemsCommand()
         {

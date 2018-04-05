@@ -31,9 +31,10 @@ namespace IPDTracker.ViewModels
 
             MessagingCenter.Subscribe<ItemDetailPage, Item>(this, "UpdateItem", async (obj, item) =>
             {
-                //var _item = Items.Where((Item arg) => arg.Id == item.Id).FirstOrDefault();
-                //_item = item;
-                await DataStore.UpdateItemAsync(item);
+                var _item = Items.Where((Item arg) => arg.Id == item.Id).FirstOrDefault();
+                _item.Description = item.Description;
+                _item.Text = item.Text;
+                await DataStore.UpdateItemAsync(_item);
             });
         }
 

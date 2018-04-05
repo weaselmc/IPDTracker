@@ -10,6 +10,9 @@
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\NewBillingEntryPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
@@ -29,6 +32,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\BillingEntryDetailPage.xaml.cs">
       <DependentUpon>BillingEntryDetailPage.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\NewBillingEntryPage.xaml.cs">
+      <DependentUpon>NewBillingEntryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\RootPage.xaml.cs">
       <DependentUpon>RootPage.xaml</DependentUpon>

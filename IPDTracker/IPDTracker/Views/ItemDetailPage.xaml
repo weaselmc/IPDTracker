@@ -4,6 +4,7 @@
              x:Class="IPDTracker.Views.ItemDetailPage"
              Title="{Binding Title}">
     <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
         <ToolbarItem Text="Update" Clicked="Update_Clicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>

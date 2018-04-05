@@ -28,7 +28,7 @@ namespace IPDTracker.Views
             if (item == null)
                 return;
 
-            //await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
+            await Navigation.PushModalAsync(new NavigationPage(new BillingEntryDetailPage(new BillingEntryDetailViewModel(item))));
 
             // Manually deselect item.
             ItemsListView.SelectedItem = null;

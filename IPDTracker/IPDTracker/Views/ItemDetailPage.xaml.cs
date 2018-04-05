@@ -39,5 +39,11 @@ namespace IPDTracker.Views
             MessagingCenter.Send(this, "UpdateItem", viewModel.Item);
             await Navigation.PopModalAsync();
         }
+
+        private async void Cancel_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopModalAsync();
+        }
+
     }
 }

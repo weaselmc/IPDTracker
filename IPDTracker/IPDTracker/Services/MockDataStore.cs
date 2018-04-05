@@ -41,9 +41,9 @@ namespace IPDTracker.Services
         public async Task<bool> UpdateItemAsync(Item item)
         {
             var _item = items.Where((Item arg) => arg.Id == item.Id).FirstOrDefault();
-            items.Remove(_item);
-            items.Add(item);
-
+            //items.Remove(_item);
+            //items.Add(item);
+            _item = item;
             return await Task.FromResult(true);
         }
 
