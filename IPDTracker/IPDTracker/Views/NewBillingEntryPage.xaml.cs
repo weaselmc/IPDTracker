@@ -27,5 +27,10 @@ namespace IPDTracker.Views
             MessagingCenter.Send(this, "AddEntry", Entry);
             await Navigation.PopModalAsync();
         }
+
+        private async void Cancel_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopModalAsync();
+        }
     }
 }

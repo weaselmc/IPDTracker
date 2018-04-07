@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -29,10 +30,14 @@ namespace IPDTracker.ViewModels
                 Items.Add(_entry);
                 //await DataStore.AddItemAsync(_entry);
             });
-            MessagingCenter.Subscribe<NewBillingEntryPage, BillingEntry>
+            MessagingCenter.Subscribe<BillingEntryDetailPage, BillingEntry>
                 (this, "UpdateEntry", async (obj, entry) =>
                 {
-                    //var _entry = entry as BillingEntry;
+                    var _entry = Items.Where((BillingEntry arg) => arg.Id == entry.Id).FirstOrDefault();
+                    _entry.ClientName = entry.ClientName;
+                    _entry.BillingDate = entry.BillingDate;
+                    _entry.BillingTime = entry.BillingTime;
+                    _entry.Notes = entry.Notes;
                     //Items.Add(_entry);
                     //await DataStore.AddItemAsync(_entry);
                 });

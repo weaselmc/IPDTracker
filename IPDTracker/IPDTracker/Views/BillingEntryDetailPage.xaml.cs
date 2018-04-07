@@ -36,7 +36,12 @@ namespace IPDTracker.Views
 
         private async void Update_Clicked(object sender, EventArgs e)
         {
-            MessagingCenter.Send(this, "UpdateItem", viewModel.Item);
+            MessagingCenter.Send(this, "UpdateEntry", viewModel.Entry);
+            await Navigation.PopModalAsync();
+        }
+
+        private async void Cancel_Clicked(object sender, EventArgs e)
+        {
             await Navigation.PopModalAsync();
         }
     }
