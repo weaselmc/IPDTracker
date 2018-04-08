@@ -1,8 +1,11 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+
+using SQLite;
 
 namespace IPDTracker.Models
 {
@@ -14,6 +17,7 @@ namespace IPDTracker.Models
         private TimeSpan _billingtime;
         private string _notes;
 
+        [PrimaryKey]
         public Guid Id { get; set; }
         public string ClientName
         {

@@ -3,7 +3,6 @@
 using Xamarin.Forms;
 
 using IPDTracker.Models;
-using IPDTracker.Views;
 
 
 namespace IPDTracker.ViewModels
@@ -17,7 +16,7 @@ namespace IPDTracker.ViewModels
             //create duplicate of item to edit
             Item  = new Item()
             {
-                Id = item?.Id,
+                Id = item.Id,
                 Text = item?.Text,
                 Description = item?.Description
             };

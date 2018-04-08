@@ -12,9 +12,10 @@ namespace IPDTracker.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>() ?? new MockDataStore();
+        public IDataStore<Item> ItemDataStore => DependencyService.Get<IDataStore<Item>>() ?? new DbItemStore();
+        public IDataStore<BillingEntry> EntryDataStore => DependencyService.Get<IDataStore<BillingEntry>>() ?? new DbEntryStore();
 
-        bool isBusy = false;
+        bool isBusy = false; 
         public bool IsBusy
         {
             get { return isBusy; }
@@ -27,6 +28,8 @@ namespace IPDTracker.ViewModels
             get { return title; }
             set { SetProperty(ref title, value); }
         }
+        
+        #region INotifyPropertyChanged
 
         protected bool SetProperty<T>(ref T backingStore, T value,
             [CallerMemberName]string propertyName = "",
@@ -41,7 +44,6 @@ namespace IPDTracker.ViewModels
             return true;
         }
 
-        #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {

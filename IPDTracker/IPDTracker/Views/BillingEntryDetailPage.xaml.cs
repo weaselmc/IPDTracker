@@ -40,6 +40,12 @@ namespace IPDTracker.Views
             await Navigation.PopModalAsync();
         }
 
+        private async void Delete_Clicked(object sender, EventArgs e)
+        {
+            MessagingCenter.Send(this, "DeleteEntry", viewModel.Entry);
+            await Navigation.PopModalAsync();
+        }
+
         private async void Cancel_Clicked(object sender, EventArgs e)
         {
             await Navigation.PopModalAsync();

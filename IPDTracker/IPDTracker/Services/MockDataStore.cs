@@ -8,7 +8,7 @@ using IPDTracker.Models;
 [assembly: Xamarin.Forms.Dependency(typeof(IPDTracker.Services.MockDataStore))]
 namespace IPDTracker.Services
 {
-    public class MockDataStore : IDataStore<Item>
+    public class MockDataStore //: IDataStore<Item>
     {
         List<Item> items;
 
@@ -17,12 +17,12 @@ namespace IPDTracker.Services
             items = new List<Item>();
             var mockItems = new List<Item>
             {
-                new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Second item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Third item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is an item description." },
+                new Item { Id = Guid.NewGuid(), Text = "First item", Description="This is an item description." },
+                new Item { Id = Guid.NewGuid(), Text = "Second item", Description="This is an item description." },
+                new Item { Id = Guid.NewGuid(), Text = "Third item", Description="This is an item description." },
+                new Item { Id = Guid.NewGuid(), Text = "Fourth item", Description="This is an item description." },
+                new Item { Id = Guid.NewGuid(), Text = "Fifth item", Description="This is an item description." },
+                new Item { Id = Guid.NewGuid(), Text = "Sixth item", Description="This is an item description." },
             };
 
             foreach (var item in mockItems)
@@ -55,7 +55,7 @@ namespace IPDTracker.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<Item> GetItemAsync(string id)
+        public async Task<Item> GetItemAsync(Guid id)
         {
             return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
         }

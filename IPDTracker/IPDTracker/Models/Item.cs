@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
+using SQLite;
+
 namespace IPDTracker.Models
 {
     public class Item : INotifyPropertyChanged
     {
         private string _text;
         private string _description;
-        public string Id { get; set; }
+
+        [PrimaryKey]
+        public Guid Id { get; set; }
         public string Text
         {
             get { return _text; }

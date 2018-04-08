@@ -28,7 +28,7 @@ namespace IPDTracker.ViewModels
             {
                 var _entry = entry as BillingEntry;
                 Items.Add(_entry);
-                //await DataStore.AddItemAsync(_entry);
+                await EntryDataStore.AddItemAsync(_entry);
             });
             MessagingCenter.Subscribe<BillingEntryDetailPage, BillingEntry>
                 (this, "UpdateEntry", async (obj, entry) =>
@@ -39,7 +39,14 @@ namespace IPDTracker.ViewModels
                     _entry.BillingTime = entry.BillingTime;
                     _entry.Notes = entry.Notes;
                     //Items.Add(_entry);
-                    //await DataStore.AddItemAsync(_entry);
+                    await EntryDataStore.UpdateItemAsync(_entry);
+                });
+            MessagingCenter.Subscribe<BillingEntryDetailPage, BillingEntry>
+                (this, "DeleteEntry", async (obj, entry) =>
+                {
+                    var _entry = Items.Where((BillingEntry arg) => arg.Id == entry.Id).FirstOrDefault();
+                    Items.Remove(_entry);
+                    await EntryDataStore.DeleteItemAsync(_entry);
                 });
         }
         async Task ExecuteLoadItemsCommand()
@@ -52,35 +59,35 @@ namespace IPDTracker.ViewModels
             try
             {
                 Items.Clear();
-                //var items = await DataStore.GetItemsAsync(true);
-                //foreach (var item in items)
+                var items = await EntryDataStore.GetItemsAsync(true);
+                foreach (var item in items)
+                {
+                    Items.Add(item);
+                }
+                //Items.Add(new BillingEntry()
                 //{
-                //    Items.Add(item);
-                //}
-                Items.Add(new BillingEntry()
-                {
-                    Id = Guid.NewGuid(),
-                    ClientName = "Nelson Muntz",
-                    BillingDate = DateTime.Now,
-                    BillingTime = new TimeSpan(1, 22, 0),
-                    Notes = "Horrible laugh!!!"
-                });
-                Items.Add(new BillingEntry()
-                {
-                    Id = Guid.NewGuid(),
-                    ClientName = "Jimbo Jones",
-                    BillingDate = DateTime.Now,
-                    BillingTime = new TimeSpan(0, 57, 0),
-                    Notes = "Loves Beanies!!!"
-                });
-                Items.Add(new BillingEntry()
-                {
-                    Id = Guid.NewGuid(),
-                    ClientName = "Dolphin Rainbow",
-                    BillingDate = DateTime.Now,
-                    BillingTime = new TimeSpan(2, 42, 0),
-                    Notes = "Stupid Hippie Parents!!!"
-                });
+                //    Id = Guid.NewGuid(),
+                //    ClientName = "Nelson Muntz",
+                //    BillingDate = DateTime.Now,
+                //    BillingTime = new TimeSpan(1, 22, 0),
+                //    Notes = "Horrible laugh!!!"
+                //});
+                //Items.Add(new BillingEntry()
+                //{
+                //    Id = Guid.NewGuid(),
+                //    ClientName = "Jimbo Jones",
+                //    BillingDate = DateTime.Now,
+                //    BillingTime = new TimeSpan(0, 57, 0),
+                //    Notes = "Loves Beanies!!!"
+                //});
+                //Items.Add(new BillingEntry()
+                //{
+                //    Id = Guid.NewGuid(),
+                //    ClientName = "Dolphin Rainbow",
+                //    BillingDate = DateTime.Now,
+                //    BillingTime = new TimeSpan(2, 42, 0),
+                //    Notes = "Stupid Hippie Parents!!!"
+                //});
             }
             catch (Exception ex)
             {

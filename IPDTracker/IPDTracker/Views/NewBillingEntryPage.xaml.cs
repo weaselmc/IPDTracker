@@ -19,6 +19,7 @@ namespace IPDTracker.Views
 			InitializeComponent ();
             Entry = new BillingEntry();
             Entry.Id = Guid.NewGuid();
+            Entry.BillingDate = DateTime.Now;
             BindingContext = this;
 		}
 

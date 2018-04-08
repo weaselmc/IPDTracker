@@ -26,7 +26,7 @@ namespace IPDTracker.ViewModels
             {
                 var _item = item as Item;
                 Items.Add(_item);
-                await DataStore.AddItemAsync(_item);
+                await ItemDataStore.AddItemAsync(_item);
             });
 
             MessagingCenter.Subscribe<ItemDetailPage, Item>(this, "UpdateItem", async (obj, item) =>
@@ -34,7 +34,14 @@ namespace IPDTracker.ViewModels
                 var _item = Items.Where((Item arg) => arg.Id == item.Id).FirstOrDefault();
                 _item.Description = item.Description;
                 _item.Text = item.Text;
-                await DataStore.UpdateItemAsync(_item);
+                var result = await ItemDataStore.UpdateItemAsync(_item);
+            });
+
+            MessagingCenter.Subscribe<ItemDetailPage, Item>(this, "DeleteItem", async (obj, item) =>
+            {
+                var _item = Items.Where((Item arg) => arg.Id == item.Id).FirstOrDefault();
+                Items.Remove(_item);
+                var result = await ItemDataStore.DeleteItemAsync(_item);
             });
         }
 
@@ -48,7 +55,7 @@ namespace IPDTracker.ViewModels
             try
             {
                 Items.Clear();
-                var items = await DataStore.GetItemsAsync(true);
+                var items = await ItemDataStore.GetItemsAsync(true);
                 foreach (var item in items)
                 {
                     Items.Add(item);

@@ -19,6 +19,7 @@ namespace IPDTracker.Views
 
             Item = new Item
             {
+                Id = Guid.NewGuid(),
                 Text = "Item name",
                 Description = "This is an item description."
             };
