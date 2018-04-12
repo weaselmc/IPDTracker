@@ -20,9 +20,11 @@ namespace IPDTracker.Views
 
         public ItemsPage()
         {
+            BindingContext = viewModel = new ItemsViewModel();
+
             InitializeComponent();
 
-            BindingContext = viewModel = new ItemsViewModel();
+            
         }
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
