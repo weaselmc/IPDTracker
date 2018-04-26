@@ -27,17 +27,17 @@ namespace IPDTracker.ViewModels
                     new RootPageMenuItem { Id = 2, Title = "About",
                         Icon ="fas-question-circle", TargetType=typeof(AboutPage) }
                 });
-            //int i = 3;
-            //foreach (Icon icon in FontAwesomeCollection.SolidIcons)
-            //{
-            //    MenuItems.Add(new RootPageMenuItem { Id = i, Title = icon.Key, Icon = icon.Key, TargetType = typeof(ItemsPage) });
-            //    i++;
-            //}
-            //foreach (Icon icon in FontAwesomeCollection.RegularIcons)
-            //{
-            //    MenuItems.Add(new RootPageMenuItem { Id = i, Title = icon.Key, Icon = icon.Key, TargetType = typeof(ItemsPage) });
-            //    i++;
-            //}
+            int i = 3;
+            foreach (Icon icon in FontAwesomeCollection.SolidIcons)
+            {
+                MenuItems.Add(new RootPageMenuItem { Id = i, Title = icon.Key, Icon = icon.Key, TargetType = typeof(ItemsPage) });
+                i++;
+            }
+            foreach (Icon icon in FontAwesomeCollection.RegularIcons)
+            {
+                MenuItems.Add(new RootPageMenuItem { Id = i, Title = icon.Key, Icon = icon.Key, TargetType = typeof(ItemsPage) });
+                i++;
+            }
         }
 
         #region INotifyPropertyChanged Implementation

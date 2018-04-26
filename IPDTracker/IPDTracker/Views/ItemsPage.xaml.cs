@@ -46,8 +46,6 @@ namespace IPDTracker.Views
 
         protected override void OnAppearing()
         {
-            base.OnAppearing();
-
             foreach(IconToolbarItem item in ToolbarItems)
             {
                 var visible = item.IsVisible;
@@ -57,6 +55,7 @@ namespace IPDTracker.Views
 
             if (viewModel.Items.Count == 0)
                 viewModel.LoadItemsCommand.Execute(null);
+            base.OnAppearing();
         }
     }
 }
