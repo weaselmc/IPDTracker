@@ -7,6 +7,8 @@ using System.Text;
 using IPDTracker.Views;
 using IPDTracker.Models;
 using System.Runtime.CompilerServices;
+using Plugin.Iconize;
+using Plugin.Iconize.Fonts;
 
 namespace IPDTracker.ViewModels
 {
@@ -18,10 +20,24 @@ namespace IPDTracker.ViewModels
         {
             MenuItems = new ObservableCollection<RootPageMenuItem>(new[]
             {
-                    new RootPageMenuItem { Id = 0, Title = "Items", TargetType=typeof(ItemsPage) },
-                    new RootPageMenuItem { Id = 1, Title = "Billing Entries", TargetType=typeof(BillingPage) },
-                    new RootPageMenuItem { Id = 2, Title = "About", TargetType=typeof(AboutPage) }
+                    new RootPageMenuItem { Id = 0, Title = "Items",
+                        Icon="fas-address-book", TargetType =typeof(ItemsPage) },
+                    new RootPageMenuItem { Id = 1, Title = "Billing Entries",
+                        Icon="fas-calendar", TargetType=typeof(BillingPage) },
+                    new RootPageMenuItem { Id = 2, Title = "About",
+                        Icon ="fas-question-circle", TargetType=typeof(AboutPage) }
                 });
+            //int i = 3;
+            //foreach (Icon icon in FontAwesomeCollection.SolidIcons)
+            //{
+            //    MenuItems.Add(new RootPageMenuItem { Id = i, Title = icon.Key, Icon = icon.Key, TargetType = typeof(ItemsPage) });
+            //    i++;
+            //}
+            //foreach (Icon icon in FontAwesomeCollection.RegularIcons)
+            //{
+            //    MenuItems.Add(new RootPageMenuItem { Id = i, Title = icon.Key, Icon = icon.Key, TargetType = typeof(ItemsPage) });
+            //    i++;
+            //}
         }
 
         #region INotifyPropertyChanged Implementation

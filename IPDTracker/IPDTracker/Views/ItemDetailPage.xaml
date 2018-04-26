@@ -11,9 +11,9 @@
     <ContentPage.Content>
         <StackLayout Spacing="20" Padding="15">
             <Label Text="Text:" FontSize="Medium" />
-            <Entry Text="{Binding Item.Text}" FontSize="Small"/>
+            <Entry Text="{Binding Item.Text, Mode=TwoWay}" FontSize="Small"/>
             <Label Text="Description:" FontSize="Medium" />
-            <Entry Text="{Binding Item.Description}" FontSize="Small"/>
+            <Entry Text="{Binding Item.Description, Mode=TwoWay}" FontSize="Small"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

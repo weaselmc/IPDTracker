@@ -9,6 +9,7 @@ using Xamarin.Forms.Xaml;
 
 using IPDTracker.ViewModels;
 using IPDTracker.Models;
+using Plugin.Iconize;
 
 namespace IPDTracker.Views
 {
@@ -28,7 +29,9 @@ namespace IPDTracker.Views
             if (item == null)
                 return;
 
-            await Navigation.PushModalAsync(new NavigationPage(new BillingEntryDetailPage(new BillingEntryDetailViewModel(item))));
+            await Navigation.PushModalAsync(new IconNavigationPage
+                (new BillingEntryDetailPage
+                (new BillingEntryDetailViewModel(item))));
 
             // Manually deselect item.
             ItemsListView.SelectedItem = null;
@@ -41,7 +44,6 @@ namespace IPDTracker.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
             if (viewModel.Items.Count == 0)
                 viewModel.LoadItemsCommand.Execute(null);
         }

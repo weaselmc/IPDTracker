@@ -2,10 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="IPDTracker.Views.NewItemPage"
+             xmlns:icon="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize"
 		     Title="New Item">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Save" Clicked="Save_Clicked" />
-        <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
+        <icon:IconToolbarItem Icon="fas-save" Text="Save" Clicked="Save_Clicked" />
+        <icon:IconToolbarItem Icon="fas-times-circle" Text="Cancel" Clicked="Cancel_Clicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Spacing="20" Padding="15">

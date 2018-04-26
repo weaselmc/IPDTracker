@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="IPDTracker.Views.BillingEntryDetailPage">
+             x:Class="IPDTracker.Views.BillingEntryDetailPage"
+             xmlns:icon="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Update" Clicked="Update_Clicked" />
-        <ToolbarItem Text="Delete" Clicked="Delete_Clicked" />
-        <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
+        <icon:IconToolbarItem Text="Update" Clicked="Update_Clicked" IsVisible="True"/>
+        <icon:IconToolbarItem Text="Delete" Clicked="Delete_Clicked" IsVisible="True"/>
+        <icon:IconToolbarItem Text="Cancel" Clicked="Cancel_Clicked" IsVisible="True"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Spacing="20" Padding="15">

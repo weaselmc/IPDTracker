@@ -1,6 +1,7 @@
 ﻿using System;
 
 using IPDTracker.Views;
+using Plugin.Iconize;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,8 +15,8 @@ namespace IPDTracker
 		public App ()
 		{
 			InitializeComponent();
-
-
+            Iconize.With(new Plugin.Iconize.Fonts.FontAwesomeRegularModule())
+                .With(new Plugin.Iconize.Fonts.FontAwesomeSolidModule());
             MainPage = new RootPage();
         }
 

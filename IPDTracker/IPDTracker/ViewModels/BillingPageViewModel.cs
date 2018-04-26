@@ -33,7 +33,8 @@ namespace IPDTracker.ViewModels
             MessagingCenter.Subscribe<BillingEntryDetailPage, BillingEntry>
                 (this, "UpdateEntry", async (obj, entry) =>
                 {
-                    var _entry = Items.Where((BillingEntry arg) => arg.Id == entry.Id).FirstOrDefault();
+                    var _entry = Items.Where((BillingEntry arg) => 
+                    arg.Id == entry.Id).FirstOrDefault();
                     _entry.ClientName = entry.ClientName;
                     _entry.BillingDate = entry.BillingDate;
                     _entry.BillingTime = entry.BillingTime;
@@ -44,7 +45,8 @@ namespace IPDTracker.ViewModels
             MessagingCenter.Subscribe<BillingEntryDetailPage, BillingEntry>
                 (this, "DeleteEntry", async (obj, entry) =>
                 {
-                    var _entry = Items.Where((BillingEntry arg) => arg.Id == entry.Id).FirstOrDefault();
+                    var _entry = Items.Where((BillingEntry arg) => 
+                    arg.Id == entry.Id).FirstOrDefault();
                     Items.Remove(_entry);
                     await EntryDataStore.DeleteItemAsync(_entry);
                 });

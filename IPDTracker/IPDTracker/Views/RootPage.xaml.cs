@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using IPDTracker.Models;
+using Plugin.Iconize;
 
 namespace IPDTracker.Views
 {
@@ -18,6 +19,9 @@ namespace IPDTracker.Views
         {
             InitializeComponent();
             MasterPage.ListView.ItemSelected += ListView_ItemSelected;
+            //var page = (Page)Activator.CreateInstance(typeof(ItemsPage)); //BillingPage
+            //page.Title = "Items";
+            //Detail = new IconNavigationPage(page); 
             //MasterBehavior = MasterBehavior.Popover;
         }
 
@@ -30,7 +34,7 @@ namespace IPDTracker.Views
             var page = (Page)Activator.CreateInstance(item.TargetType);
             page.Title = item.Title;
 
-            Detail = new NavigationPage(page);
+            Detail = new IconNavigationPage(new NavigationPage(page));
             IsPresented = false;
 
             MasterPage.ListView.SelectedItem = null;

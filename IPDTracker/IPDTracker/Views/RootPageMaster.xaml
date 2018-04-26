@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IPDTracker.Views.RootPageMaster"
+             xmlns:icon="clr-namespace:Plugin.Iconize;assembly=Plugin.Iconize"
              Title="Menu">
   <RelativeLayout>
     <ListView x:Name="MenuItemsListView"
@@ -32,8 +33,11 @@
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>
-            <StackLayout Padding="15,10" HorizontalOptions="FillAndExpand">
-              <Label VerticalOptions="FillAndExpand" 
+            <StackLayout Padding="15,10" HorizontalOptions="FillAndExpand" 
+                         Orientation="Horizontal">
+                <icon:IconLabel Text="{Binding Icon}" 
+                    FontSize="24" VerticalTextAlignment="Center"/>
+                <Label VerticalOptions="FillAndExpand" 
                     VerticalTextAlignment="Center" 
                     Text="{Binding Title}" 
                     FontSize="24"/>

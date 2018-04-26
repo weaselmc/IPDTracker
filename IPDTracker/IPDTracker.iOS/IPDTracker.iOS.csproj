@@ -93,7 +93,6 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="TimePicker24HRenderer.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -126,7 +125,13 @@
     <PackageReference Include="sqlite-net-pcl">
       <Version>1.4.118</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="3.0.0.354232-pre3" />
+    <PackageReference Include="Xam.Plugin.Iconize">
+      <Version>3.0.0.62</Version>
+    </PackageReference>
+    <PackageReference Include="Xam.Plugin.Iconize.FontAwesome">
+      <Version>3.0.0.62</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms" Version="2.5.1.444934" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\tab_about.png" />
