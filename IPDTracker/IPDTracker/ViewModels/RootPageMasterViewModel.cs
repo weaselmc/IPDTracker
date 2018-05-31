@@ -20,8 +20,8 @@ namespace IPDTracker.ViewModels
         {
             MenuItems = new ObservableCollection<RootPageMenuItem>(new[]
             {
-                    new RootPageMenuItem { Id = 0, Title = "Items",
-                        Icon="fas-address-book", TargetType =typeof(ItemsPage) },
+                    //new RootPageMenuItem { Id = 0, Title = "Items",
+                    //    Icon="fas-address-book", TargetType =typeof(ItemsPage) },
                     new RootPageMenuItem { Id = 1, Title = "Billing Entries",
                         Icon="fas-calendar", TargetType=typeof(BillingPage) },
                     new RootPageMenuItem { Id = 2, Title = "About",
