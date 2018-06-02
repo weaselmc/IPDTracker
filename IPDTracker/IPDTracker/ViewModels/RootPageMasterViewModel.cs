@@ -30,12 +30,12 @@ namespace IPDTracker.ViewModels
             int i = 3;
             foreach (Icon icon in FontAwesomeCollection.SolidIcons)
             {
-                MenuItems.Add(new RootPageMenuItem { Id = i, Title = icon.Key, Icon = icon.Key, TargetType = typeof(ItemsPage) });
+                MenuItems.Add(new RootPageMenuItem { Id = i, Title = icon.Key, Icon = icon.Key, TargetType = typeof(BillingPage) });
                 i++;
             }
             foreach (Icon icon in FontAwesomeCollection.RegularIcons)
             {
-                MenuItems.Add(new RootPageMenuItem { Id = i, Title = icon.Key, Icon = icon.Key, TargetType = typeof(ItemsPage) });
+                MenuItems.Add(new RootPageMenuItem { Id = i, Title = icon.Key, Icon = icon.Key, TargetType = typeof(BillingPage) });
                 i++;
             }
         }

@@ -9,7 +9,7 @@ namespace IPDTracker.Services
 
         Task<int> AddItemAsync(T item);
         Task<int> UpdateItemAsync(T item);
-        Task<int> DeleteItemAsync(T item);
+        Task<int> DeleteItemAsync(string id);
         Task<T> GetItemAsync(string id);
         Task<IEnumerable<T>> GetItemsAsync(bool forceRefresh = false);
     }

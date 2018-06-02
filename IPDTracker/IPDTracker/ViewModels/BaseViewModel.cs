@@ -12,10 +12,12 @@ namespace IPDTracker.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> ItemDataStore => 
-            DependencyService.Get<IDataStore<Item>>() ?? new DbItemStore();
-        public IDataStore<BillingEntry> EntryDataStore => 
-            DependencyService.Get<IDataStore<BillingEntry>>() ?? new DbEntryStore();
+
+        //public IDataStore<Item> ItemDataStore => 
+        //    DependencyService.Get<IDataStore<Item>>() ?? new DbItemStore();
+        public IDataStore<BillingEntry> LocalDataStore = SyncService.LocalDataStore;
+            
+        public AzureDataStore AzureDataStore = SyncService.AzureDataStore;
 
         bool isBusy = false; 
         public bool IsBusy

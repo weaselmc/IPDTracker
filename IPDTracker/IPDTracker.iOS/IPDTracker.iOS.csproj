@@ -117,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
@@ -132,12 +133,12 @@
       <Version>3.1.1</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugin.Iconize">
-      <Version>3.0.0.62</Version>
+      <Version>3.0.0.66</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugin.Iconize.FontAwesome">
-      <Version>3.0.0.62</Version>
+      <Version>3.0.0.66</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="2.5.1.444934" />
+    <PackageReference Include="Xamarin.Forms" Version="2.5.1.527436" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\tab_about.png" />

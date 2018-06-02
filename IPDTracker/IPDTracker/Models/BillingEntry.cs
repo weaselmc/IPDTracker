@@ -45,6 +45,8 @@ namespace IPDTracker.Models
             get { return _billingdate.ToString("dd-MMM-yyyy"); }
         }
 
+        public DateTime DateModified { get; set; }
+
         public string Notes
         {
             get { return _notes; }

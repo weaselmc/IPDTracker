@@ -9,7 +9,7 @@
   </MasterDetailPage.Master>
   <MasterDetailPage.Detail>
     <icon:IconNavigationPage>
-            <x:Arguments>
+      <x:Arguments>
         <pages:BillingPage />
       </x:Arguments>
     </icon:IconNavigationPage>

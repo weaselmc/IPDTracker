@@ -1,5 +1,5 @@
 ﻿using System;
-
+using IPDTracker.Services;
 using IPDTracker.Views;
 using Plugin.Iconize;
 using Xamarin.Forms;
@@ -12,11 +12,16 @@ namespace IPDTracker
     public partial class App : Application
 	{
 
-		public App ()
+        public static string AzureBackendUrl = @"http://ipdtracker.azurewebsites.net";
+
+
+        public App ()
 		{
 			InitializeComponent();
             Iconize.With(new Plugin.Iconize.Fonts.FontAwesomeRegularModule())
                 .With(new Plugin.Iconize.Fonts.FontAwesomeSolidModule());
+            DependencyService.Register<AzureDataStore>();
+           
             MainPage = new RootPage();
         }
 
