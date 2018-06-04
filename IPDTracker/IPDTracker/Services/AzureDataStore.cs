@@ -6,24 +6,61 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Plugin.Connectivity;
 using IPDTracker.Models;
+using Microsoft.WindowsAzure.MobileServices;
+using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
+using Microsoft.WindowsAzure.MobileServices.Sync;
 
 [assembly: Xamarin.Forms.Dependency(typeof(IPDTracker.Services.AzureDataStore))]
 namespace IPDTracker.Services
 {
 	public class AzureDataStore : IDataStore<BillingEntry>
 	{
-		HttpClient client;
-		IEnumerable<BillingEntry> items;
+
+        static AzureDataStore defaultInstance = new AzureDataStore();
+        MobileServiceClient msclient;
+        IMobileServiceSyncTable<BillingEntry> BillingEntriesTable;
+        const string offlineDbPath = @"localstore.db";
+        HttpClient client;
+        IEnumerable<BillingEntry> items;
 
 		public AzureDataStore()
 		{
-			client = new HttpClient();
-			client.BaseAddress = new Uri($"{App.AzureBackendUrl}/");
+            client = new HttpClient();
+            client.BaseAddress = new Uri($"{App.AzureBackendUrl}/");
+            msclient = new MobileServiceClient(App.AzureBackendUrl);
 
-			items = new List<BillingEntry>();
+            var store = new MobileServiceSQLiteStore(offlineDbPath);
+            store.DefineTable<BillingEntry>();
+
+            //Initializes the SyncContext using the default IMobileServiceSyncHandler.
+            msclient.SyncContext.InitializeAsync(store);
+
+            BillingEntriesTable = msclient.GetSyncTable<BillingEntry>();
+            items = new List<BillingEntry>();
 		}
+        public static AzureDataStore DefaultStore
+        {
+            get
+            {
+                return defaultInstance;
+            }
+            private set
+            {
+                defaultInstance = value;
+            }
+        }
 
-		public async Task<IEnumerable<BillingEntry>> GetItemsAsync(bool forceRefresh = false)
+        public MobileServiceClient CurrentClient
+        {
+            get { return msclient; }
+        }
+
+        public bool IsOfflineEnabled
+        {
+            get { return BillingEntriesTable is IMobileServiceSyncTable<BillingEntry>; }
+        }
+
+        public async Task<IEnumerable<BillingEntry>> GetItemsAsync(bool forceRefresh = false)
 		{
 			if (forceRefresh && CrossConnectivity.Current.IsConnected)
 			{

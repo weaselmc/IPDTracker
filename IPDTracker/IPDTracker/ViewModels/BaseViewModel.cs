@@ -19,7 +19,8 @@ namespace IPDTracker.ViewModels
             
         public AzureDataStore AzureDataStore = SyncService.AzureDataStore;
 
-        bool isBusy = false; 
+        bool isBusy = false;        
+
         public bool IsBusy
         {
             get { return isBusy; }

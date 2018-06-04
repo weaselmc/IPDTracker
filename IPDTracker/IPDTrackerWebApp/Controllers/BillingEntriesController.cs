@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using IPDTrackerWebApp;
 using IPDTrackerWebApp.Model;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IPDTrackerWebApp.Controllers
 {
     [Produces("application/json")]
     [Route("api/BillingEntries")]
+    [Authorize]
     public class BillingEntriesController : Controller
     {
         private readonly IPDContext _context;

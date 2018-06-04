@@ -17,6 +17,8 @@ namespace IPDTracker.Views
     public partial class BillingPage : ContentPage
     {
         BillingPageViewModel viewModel;
+        bool authenticated = false;
+
         public BillingPage()
         {
             InitializeComponent();
@@ -44,7 +46,23 @@ namespace IPDTracker.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            if (viewModel.Items.Count == 0)
+            if (authenticated == true)
+            {
+                if (viewModel.Items.Count == 0)
+                {
+                    viewModel.LoadItemsCommand.Execute(null);
+                    loginButton.IsVisible = false;
+                }
+            }
+        }
+
+        async void loginButton_Clicked(object sender, EventArgs e)
+        {
+            if (App.Authenticator != null)
+                authenticated = await App.Authenticator.Authenticate();
+
+            // Set syncItems to true to synchronize the data on startup when offline is enabled.
+            if (authenticated == true)
                 viewModel.LoadItemsCommand.Execute(null);
         }
     }

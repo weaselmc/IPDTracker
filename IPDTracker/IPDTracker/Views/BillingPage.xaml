@@ -10,6 +10,8 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
+            <Button x:Name="loginButton" Text="Sign-in" MinimumHeightRequest="30"
+                Clicked="loginButton_Clicked"/>
             <ListView x:Name="ItemsListView" 
             ItemsSource="{Binding Items}"
             VerticalOptions="FillAndExpand"

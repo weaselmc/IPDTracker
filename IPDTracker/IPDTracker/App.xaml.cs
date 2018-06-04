@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using IPDTracker.Services;
 using IPDTracker.Views;
 using Plugin.Iconize;
@@ -25,7 +26,18 @@ namespace IPDTracker
             MainPage = new RootPage();
         }
 
-		protected override void OnStart ()
+        public interface IAuthenticate
+        {
+            Task<bool> Authenticate();
+        }
+
+        public static IAuthenticate Authenticator { get; private set; }
+
+        public static void Init(IAuthenticate authenticator)
+        {
+            Authenticator = authenticator;
+        }
+        protected override void OnStart ()
 		{
 			// Handle when your app starts
 		}
