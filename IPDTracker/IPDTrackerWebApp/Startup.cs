@@ -24,7 +24,7 @@ namespace IPDTrackerWebApp
                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                .AddEnvironmentVariables();
-
+            
             Configuration = builder.Build();
         }
 
@@ -41,7 +41,7 @@ namespace IPDTrackerWebApp
                 services.AddDbContext<IPDContext>(options =>
                     options.UseSqlite("Data Source=localdatabase.db"));
             //services.AddDbContext<IPDContext>(opt =>
-            //    opt.UseSqlServer("IPDTrackerConnection")); 
+            //    opt.UseSqlServer("IPDTrackerConnection"));
             services.AddMvc();
             services.BuildServiceProvider().GetService<IPDContext>().Database.Migrate();
         }
@@ -62,7 +62,8 @@ namespace IPDTrackerWebApp
                 settings.GeneratorSettings.DefaultPropertyNameHandling =
                     PropertyNameHandling.CamelCase;
             });
-
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseMvc();
         }
     }
