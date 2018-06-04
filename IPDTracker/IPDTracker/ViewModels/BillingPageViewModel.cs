@@ -81,7 +81,9 @@ namespace IPDTracker.ViewModels
                 return;
 
             IsBusy = true;
+            
             await SyncService.SyncAsync();
+            
             try
             {
                 Items.Clear();

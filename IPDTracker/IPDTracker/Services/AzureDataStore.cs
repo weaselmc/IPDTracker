@@ -60,7 +60,7 @@ namespace IPDTracker.Services
 		public async Task<int> UpdateItemAsync(BillingEntry item)
 		{
 			if (item == null || item.Id == null || !CrossConnectivity.Current.IsConnected)
-				return 404;
+				return 404; //should store to localdb cache and sync later baseed on datemodified
             item.DateModified = DateTime.Now;
             var serializedItem = JsonConvert.SerializeObject(item);
 			var buffer = Encoding.UTF8.GetBytes(serializedItem);
