@@ -11,9 +11,10 @@ using System;
 namespace IPDTrackerWebApp.Migrations
 {
     [DbContext(typeof(IPDContext))]
-    partial class IPDContextModelSnapshot : ModelSnapshot
+    [Migration("20180605153129_AddedUserId")]
+    partial class AddedUserId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

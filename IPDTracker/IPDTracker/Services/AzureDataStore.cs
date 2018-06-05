@@ -29,13 +29,12 @@ namespace IPDTracker.Services
             client.BaseAddress = new Uri($"{App.AzureBackendUrl}/");
             msclient = new MobileServiceClient(App.AzureBackendUrl);
 
-            var store = new MobileServiceSQLiteStore(offlineDbPath);
-            store.DefineTable<BillingEntry>();
+            //var store = new MobileServiceSQLiteStore(offlineDbPath);
+            //store.DefineTable<BillingEntry>();
 
             //Initializes the SyncContext using the default IMobileServiceSyncHandler.
-            msclient.SyncContext.InitializeAsync(store);
-
-            BillingEntriesTable = msclient.GetSyncTable<BillingEntry>();
+            //msclient.SyncContext.InitializeAsync(store);
+            //BillingEntriesTable = msclient.GetSyncTable<BillingEntry>();
             items = new List<BillingEntry>();
 		}
         public static AzureDataStore DefaultStore
@@ -60,11 +59,12 @@ namespace IPDTracker.Services
             get { return BillingEntriesTable is IMobileServiceSyncTable<BillingEntry>; }
         }
 
-        public async Task<IEnumerable<BillingEntry>> GetItemsAsync(bool forceRefresh = false)
-		{
+        public async Task<IEnumerable<BillingEntry>> GetItemsAsync(bool forceRefresh = false) //&& msclient.CurrentUser != null ??
+        {
 			if (forceRefresh && CrossConnectivity.Current.IsConnected)
 			{
-				var json = await client.GetStringAsync($"api/billingentries");
+                //get only items from msclient.CurrentUser.UserId? Need to mod Controller :(
+                var json = await client.GetStringAsync($"api/billingentries");
 				items = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<BillingEntry>>(json));
 			}
 
@@ -73,8 +73,9 @@ namespace IPDTracker.Services
 
 		public async Task<BillingEntry> GetItemAsync(string id)
 		{
-			if (id != null && CrossConnectivity.Current.IsConnected)
-			{
+			if (id != null && CrossConnectivity.Current.IsConnected) //&& msclient.CurrentUser != null ??
+            {
+
 				var json = await client.GetStringAsync($"api/billingentries/{id}");
 				return await Task.Run(() => JsonConvert.DeserializeObject<BillingEntry>(json));
 			}
@@ -87,6 +88,7 @@ namespace IPDTracker.Services
 			if (item == null || !CrossConnectivity.Current.IsConnected)
 				return 404;
             item.DateModified = DateTime.Now;
+            item.UserId = msclient.CurrentUser.UserId;
 			var serializedItem = JsonConvert.SerializeObject(item);
 
 			var response = await client.PostAsync($"api/billingentries", new StringContent(serializedItem, Encoding.UTF8, "application/json"));
@@ -99,6 +101,7 @@ namespace IPDTracker.Services
 			if (item == null || item.Id == null || !CrossConnectivity.Current.IsConnected)
 				return 404; //should store to localdb cache and sync later baseed on datemodified
             item.DateModified = DateTime.Now;
+            item.UserId = msclient.CurrentUser.UserId;
             var serializedItem = JsonConvert.SerializeObject(item);
 			var buffer = Encoding.UTF8.GetBytes(serializedItem);
 			var byteContent = new ByteArrayContent(buffer);

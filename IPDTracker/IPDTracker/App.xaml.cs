@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using IPDTracker.Services;
 using IPDTracker.Views;
+using Microsoft.WindowsAzure.MobileServices;
 using Plugin.Iconize;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,10 +13,9 @@ namespace IPDTracker
     
     public partial class App : Application
 	{
-
-        public static string AzureBackendUrl = @"http://ipdtracker.azurewebsites.net";
-
-
+        public static string AzureSchemaUrl = "ipdtracker.azurewebsites.net";
+        public static string AzureBackendUrl = @"https://" + AzureSchemaUrl;
+        
         public App ()
 		{
 			InitializeComponent();

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using IPDTracker.Services;
+using Microsoft.WindowsAzure.MobileServices;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -96,6 +98,16 @@ namespace IPDTracker.UWP
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+        protected override void OnActivated(IActivatedEventArgs args)
+        {
+            base.OnActivated(args);
+
+            if (args.Kind == ActivationKind.Protocol)
+            {
+                ProtocolActivatedEventArgs protocolArgs = args as ProtocolActivatedEventArgs;
+                AzureDataStore.DefaultStore.CurrentClient.ResumeWithURL(protocolArgs.Uri);
+            }
         }
     }
 }

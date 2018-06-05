@@ -12,6 +12,7 @@ namespace IPDTrackerWebApp.Model
         public DateTime BillingDate { get; set; }
         public TimeSpan BillingTime { get; set; }
         public string Notes { get; set; }
+        public string UserId { get; set; }
         public DateTime LastModified { get; set; }
     }
 }

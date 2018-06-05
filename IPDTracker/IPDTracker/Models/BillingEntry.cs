@@ -46,6 +46,7 @@ namespace IPDTracker.Models
         }
 
         public DateTime DateModified { get; set; }
+        public string UserId { get; set; }
 
         public string Notes
         {
