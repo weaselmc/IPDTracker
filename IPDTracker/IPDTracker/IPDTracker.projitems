@@ -20,9 +20,9 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Models\BillingEntry.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\AzureDataStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\BillingEntriesManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\LocalDataStore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IDataStore.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\SyncService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AboutViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BaseViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BillingPageViewModel.cs" />

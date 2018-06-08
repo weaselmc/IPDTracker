@@ -66,7 +66,7 @@ namespace IPDTracker.UWP
 
         //    return success;
         //}
-        public async Task<bool> Authenticate()
+        public async Task<bool> AuthenticateAsync()
         {
             string message;
             bool success = false;
@@ -94,10 +94,9 @@ namespace IPDTracker.UWP
                 user = new MobileServiceUser(credential.UserName);
                 credential.RetrievePassword();
                 user.MobileServiceAuthenticationToken = credential.Password;
-
                 // Set the user from the stored credentials.
-                AzureDataStore.DefaultStore.CurrentClient.CurrentUser = user;
-
+                //AzureDataStore.DefaultStore.SetAuthenticatedUser(user);
+                IPDTracker.App.SetUser(user);
                 // Consider adding a check to determine if the token is 
                 // expired, as shown in this post: http://aka.ms/jww5vp.
 
@@ -109,14 +108,14 @@ namespace IPDTracker.UWP
                 try
                 {
                     // Login with the identity provider.
-                    user = await AzureDataStore.DefaultStore.CurrentClient
-                        .LoginAsync(provider, IPDTracker.App.AzureSchemaUrl);
+                    user = await AzureDataStore.DefaultStore.CurrentClient.
+                        LoginAsync(provider, IPDTracker.App.AppSchema);
 
                     // Create and store the user credentials.
                     credential = new PasswordCredential(provider.ToString(),
                         user.UserId, user.MobileServiceAuthenticationToken);
                     vault.Add(credential);
-
+                    IPDTracker.App.SetUser(user);
                     success = true;
                     message = string.Format("You are now logged in - {0}", user.UserId);
                 }

@@ -13,9 +13,14 @@ namespace IPDTracker
     
     public partial class App : Application
 	{
-        public static string AzureSchemaUrl = "ipdtracker.azurewebsites.net";
-        public static string AzureBackendUrl = @"https://" + AzureSchemaUrl;
+        public static MobileServiceUser User { get; private set; }
+
+        public static void SetUser(MobileServiceUser user)
+            => User = user;
         
+        public static string AppSchema = "net.azurewebsites.ipdtracker";
+        public static  string AzureBackendUrl = @"https://ipdtracker.azurewebsites.net";
+
         public App ()
 		{
 			InitializeComponent();
@@ -28,7 +33,7 @@ namespace IPDTracker
 
         public interface IAuthenticate
         {
-            Task<bool> Authenticate();
+            Task<bool> AuthenticateAsync();
         }
 
         public static IAuthenticate Authenticator { get; private set; }

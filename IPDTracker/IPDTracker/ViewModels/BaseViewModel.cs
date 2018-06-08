@@ -15,9 +15,10 @@ namespace IPDTracker.ViewModels
 
         //public IDataStore<Item> ItemDataStore => 
         //    DependencyService.Get<IDataStore<Item>>() ?? new DbItemStore();
-        public IDataStore<BillingEntry> LocalDataStore = SyncService.LocalDataStore;
-            
-        public AzureDataStore AzureDataStore = SyncService.AzureDataStore;
+        public IDataStore<BillingEntry> LocalDataStore =>
+           DependencyService.Get<IDataStore<BillingEntry>>() ?? new LocalDataStore();
+
+        //public AzureDataStore AzureDataStore = AzureDataStore;
 
         bool isBusy = false;        
 

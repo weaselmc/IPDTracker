@@ -13,7 +13,7 @@ namespace IPDTracker.Services
     public class LocalDataStore : IDataStore<BillingEntry>
     {
         static string dbname = "ipd.db.sqlite";
-
+        static LocalDataStore defaultStore = new LocalDataStore();
 #if __ANDROID__
         public static string path = Environment.GetFolderPath(
         Environment.SpecialFolder.Personal);
@@ -30,6 +30,8 @@ namespace IPDTracker.Services
         public static string DbPath = Path.Combine(path, dbname);
         public static SQLiteAsyncConnection DbConn =
             new SQLiteAsyncConnection(DbPath);
+
+        
 
         public LocalDataStore()
         {

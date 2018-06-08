@@ -29,7 +29,7 @@ namespace IPDTracker.Droid
         }
         private MobileServiceUser user;
 
-        public async Task<bool> Authenticate()
+        public async Task<bool> AuthenticateAsync()
         {
             var success = false;
             var message = string.Empty;
@@ -37,12 +37,12 @@ namespace IPDTracker.Droid
             {
                 // Sign in with Facebook login using a server-managed flow.
                 user = await AzureDataStore.DefaultStore.CurrentClient.LoginAsync(this,
-                    MobileServiceAuthenticationProvider.MicrosoftAccount, IPDTracker.App.AzureSchemaUrl);
+                    MobileServiceAuthenticationProvider.MicrosoftAccount, IPDTracker.App.AppSchema);
                 if (user != null)
                 {
                     message = string.Format("you are now signed-in as {0}.",
                         user.UserId);
-                    AzureDataStore.DefaultStore.CurrentClient.CurrentUser = user;
+                    IPDTracker.App.SetUser(user);
                     success = true;
                 }
             }

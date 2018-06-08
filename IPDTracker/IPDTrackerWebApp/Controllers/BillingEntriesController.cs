@@ -27,9 +27,10 @@ namespace IPDTrackerWebApp.Controllers
         [HttpGet]
         public IEnumerable<BillingEntry> GetBillingEntries()
         {
-            return _context.BillingEntries;
-        }
 
+            return _context.BillingEntries; //.Where(b => b.UserId == User.Identity.Name);
+        }
+        
         // GET: api/BillingEntries/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBillingEntry([FromRoute] Guid id)

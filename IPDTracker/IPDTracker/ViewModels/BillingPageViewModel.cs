@@ -31,7 +31,7 @@ namespace IPDTracker.ViewModels
                 Items.Add(_entry);
                 try
                 {
-                    await AzureDataStore.AddItemAsync(_entry);
+                    await AzureDataStore.DefaultStore.AddItemAsync(_entry);
                 }
 
                 catch
@@ -51,7 +51,7 @@ namespace IPDTracker.ViewModels
                     //Items.Add(_entry);
                     try
                     {
-                        await AzureDataStore.UpdateItemAsync(_entry);
+                        await AzureDataStore.DefaultStore.UpdateItemAsync(_entry);
                     }
                     catch
                     {
@@ -66,7 +66,7 @@ namespace IPDTracker.ViewModels
                     Items.Remove(_entry);
                     try
                     {
-                        await AzureDataStore.DeleteItemAsync(_entry.Id.ToString());
+                        await AzureDataStore.DefaultStore.DeleteItemAsync(_entry.Id.ToString());
                     }
                     catch
                     {
@@ -82,7 +82,7 @@ namespace IPDTracker.ViewModels
 
             IsBusy = true;
             
-            await SyncService.SyncAsync();
+            await AzureDataStore.DefaultStore.SyncAsync();
             
             try
             {
@@ -90,7 +90,7 @@ namespace IPDTracker.ViewModels
                 IEnumerable<BillingEntry> items;
                 try
                 {
-                    items = await AzureDataStore.GetItemsAsync(true);
+                    items = await AzureDataStore.DefaultStore.GetItemsAsync(true);
                 }
                 catch
                 {
