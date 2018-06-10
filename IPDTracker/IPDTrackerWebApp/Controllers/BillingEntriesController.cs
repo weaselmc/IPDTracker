@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using IPDTrackerWebApp;
-using IPDTrackerWebApp.Model;
+using IPDTrackerWebApp.Data;
 using Microsoft.AspNetCore.Authorization;
 
 namespace IPDTrackerWebApp.Controllers

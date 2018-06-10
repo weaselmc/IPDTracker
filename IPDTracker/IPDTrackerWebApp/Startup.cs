@@ -1,31 +1,28 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using IPDTrackerWebApp.Data;
+using IPDTrackerWebApp.Services;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using System.Reflection;
 using NJsonSchema;
 using NSwag.AspNetCore;
-using System.Reflection;
 
 namespace IPDTrackerWebApp
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder()
-               .SetBasePath(env.ContentRootPath)
-               .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-               .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-               .AddEnvironmentVariables();
-            
-            Configuration = builder.Build();
+            Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -33,37 +30,60 @@ namespace IPDTrackerWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //can use different connection types for a local data store
-            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
-                services.AddDbContext<IPDContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("IPDTrackerConnection")));
+            services.AddDbContext<IPDContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("IPDTrackerConnection")));
-            else
-                services.AddDbContext<IPDContext>(options =>
-                    options.UseSqlite("Data Source=localdatabase.db"));
-            //services.AddDbContext<IPDContext>(opt =>
-            //    opt.UseSqlServer("IPDTrackerConnection"));
-            services.AddMvc();
-            services.BuildServiceProvider().GetService<IPDContext>().Database.Migrate();
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
+            //services.AddAuthentication().AddMicrosoftAccount(microsoftOptions =>
+            //{
+            //    microsoftOptions.ClientId = Configuration["ApplicationId"]; //Authentication:Microsoft:
+            //    microsoftOptions.ClientSecret = Configuration["Password"]; //Authentication: Microsoft:
+            //});
+
+            services.AddMvc()
+                .AddRazorPagesOptions(options =>
+                {
+                    options.Conventions.AuthorizeFolder("/Account/Manage");
+                    options.Conventions.AuthorizePage("/Account/Logout");
+                });
+
+            // Register no-op EmailSender used by account confirmation and password reset during development
+            // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713
+            services.AddSingleton<IEmailSender, EmailSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-
             if (env.IsDevelopment())
             {
+                app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+            }
+
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddDebug();
 
             app.UseSwaggerUi(typeof(Startup).GetTypeInfo().Assembly, settings =>
             {
                 settings.GeneratorSettings.DefaultPropertyNameHandling =
                     PropertyNameHandling.CamelCase;
             });
-            app.UseDefaultFiles();
+
             app.UseStaticFiles();
+
+            app.UseAuthentication();
+
             app.UseMvc();
         }
     }
